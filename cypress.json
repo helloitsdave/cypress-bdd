@@ -1,0 +1,16 @@
+{
+  "baseUrl": "http://localhost:5000",
+  "serverUrl": "http://172.17.0.2:5000",
+  "viewportWidth": 1366,
+  "viewportHeight": 768,
+  "reporter": "junit",
+  "reporterOptions": {
+    "mochaFile": "results/cypress[hash].xml",
+    "toConsole": true
+  },
+  "chromeWebSecurity": false,
+  "testFiles": ["**/*.{feature,features}"],
+  "env": {
+          "TAGS": "not @ignore"
+          }
+}

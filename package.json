@@ -1,0 +1,30 @@
+{
+  "name": "oos-ca-test",
+  "version": "1.0.0",
+  "description": "Example Test Suite for Sample Application",
+  "main": "index.js",
+  "scripts": {
+    "test-chrome": "yarn cypress run --browser chrome --headless",
+    "test-chrome-docker": "docker run -it -v $PWD:/e2e -w /e2e cypress/included:6.8.0 --config baseUrl=http://172.17.0.2:5000 --browser chrome --headless",
+    "test-electron": "yarn cypress run --headless",
+    "lint": "yarn eslint ./cypress",
+    "lint-fix": "yarn eslint ./cypress --fix"
+    },
+  "author": "helloitsdave@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "cypress": "^6.8.0",
+    "eslint-plugin-cypress": "^2.11.2",
+    "eslint": "^5.6.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "cypress-audit": "^0.3.0",
+    "cypress-cucumber-preprocessor": "^4.0.3",
+    "cypress-timings": "^1.0.0"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true
+  }
+}
