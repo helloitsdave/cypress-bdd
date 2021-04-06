@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test-chrome": "yarn cypress run --browser chrome --headless",
+    "test-mobile-width-360": "yarn cypress run --browser chrome --headless --config viewportWidth=360,viewportHeight=640",
     "test-chrome-docker": "docker run -it -v $PWD:/e2e -w /e2e cypress/included:6.8.0 --config baseUrl=http://172.17.0.2:5000 --browser chrome --headless",
     "test-electron": "yarn cypress run --headless",
     "lint": "yarn eslint ./cypress",

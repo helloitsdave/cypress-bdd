@@ -6,7 +6,7 @@ This repo is an example Test Framework using https://www.cypress.io with Cucumbe
 
 - [node](https://docs.npmjs.com/getting-started/installing-node) and [yarn](https://classic.yarnpkg.com/en/) are installed
 
-- For the cypress.io System requirements please [see here](https://docs.cypress.io/guides/getting-started/installing-cypress.html#System-requirements)
+- For the cypress.io system requirements please see [here](https://docs.cypress.io/guides/getting-started/installing-cypress.html#System-requirements)
 
 - [Docker](https://www.docker.com/) should be installed on the CI system
 
@@ -20,13 +20,14 @@ Firstly ensure the oos-ca application is up and running on http://localhost:5000
 
 There are several ways to run the suite. It's also possible to run subsets or targeted tests using the cucumber tagging feature.
 
-| Folder                                             | Description                          |
-| -------------------------------------------------- | ------------------------------------ |
-| Run In Interactive Mode                            | `yarn cypress open`                  |
-| Run All Tests In CLI Mode (electron headless)      | `yarn cypress run`                   |
-| Run In CLI Mode with chrome                        | `yarn cypress run --browser chrome`  |
-| Run In CLI Mode only the tests tagged @Mocked      | `yarn cypress run -e TAGS='@Mocked'` |
-| Run In CLI Mode using Docker {package.json script} | `yarn run test-chrome-docker`        |
+| Folder                                                                   | Description                          |
+| ------------------------------------------------------------------------ | ------------------------------------ |
+| Run In Interactive Mode                                                  | `yarn cypress open`                  |
+| Run All Tests In CLI Mode (electron headless)                            | `yarn cypress run`                   |
+| Run In CLI Mode with chrome                                              | `yarn cypress run --browser chrome`  |
+| Run In CLI Mode only the tests tagged @Mocked                            | `yarn cypress run -e TAGS='@Mocked'` |
+| Run In CLI Mode with headless mobile viewport size {package.json script} | `yarn run test-mobile-width-360`     |
+| Run In CLI Mode using Docker {package.json script}                       | `yarn run test-chrome-docker`        |
 
 You can also select which browser to use in the top right of the cypress app.
 
@@ -36,9 +37,9 @@ For additional browsers I run the tests using cypress/browsers or cypress/includ
 
 ## BDD Test Format
 
-I created tests in the 'Given, When, Then' BDD format. Feature files were created using Gherkin language syntax.
+I created tests in the 'Given, When, Then' BDD format. Feature files were created using the Gherkin language syntax.
 
-I've written the steps in a declarative way and avoided using UI specific language unless it's a UI specific check. This allows the tester to decide which layer to implement each step and also caters for underlying workflow changes not impacting the scenarios.
+I've written the steps in a declarative way and avoided using UI specific language unless it's a UI specific check. This allows the team to decide which layer to implement each step and also caters for underlying workflow changes not impacting the scenarios.
 
 I imagine in a more complete version of the product that there may be front bff or backend APIs involved, so I would be using a mix of APIs to gather data and setup data as opposed to doing everything through the UI.
 
@@ -89,14 +90,14 @@ Edge cases have been included within the feature files.
 - Cross Site Scripting - Filtering.feature
 - Accessibility - Added to ./common/app-steps.
 
-I would plan to utilize redux store manipulation further to test scenarios like
+I would plan to utilize redux store manipulation further to test scenarios for example:
 
-- Very long names or cities. What does this do to the UI?
-- Large amounts of crew members. How does the app loading times increase?
+- Very long names or cities. How does the UI handle this?
+- Large amounts of crew members. How does the app loading times increase and UI respond?
 
 ## Performance
 
-I had a look at the cypress lighthouse audit plugin, however I ran into issues running against the local app. More information in ./common/app-steps
+I had a look at the cypress lighthouse audit plugin, however I ran into issues running against the local app. Please see more information in .cypress/integration/common/app-steps.
 
 ## Linting
 
@@ -129,12 +130,24 @@ When creating the tests based on the provided instructions, I assumed the curren
 - Accessibility issues
 
 ### Browsers
-
 Tests are passing against
 
 - Electron
 - Chrome (ui and headless)
 - Firefox
+
+I set the default viewport to one of the most popular ones. Reference https://gs.statcounter.com/screen-resolution-stats
+
+Internal metrics would be used to tailor it towards a particular customer base.
+
+```
+"viewportWidth": 1920,
+"viewportHeight": 1080
+```
+
+The most popular mobile browser viewport is width 360 x height 640. I added an additional script to run with that viewport.
+
+`yarn run test-mobile-width-360`
 
 ### Unique attributes
 
