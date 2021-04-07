@@ -136,6 +136,9 @@ This is the first time I have used Cucumber in conjunction with Cypress. I found
 
 I have tagged the scenarios in order to allow different combinations to be executed using -e TAGS='@tagName'.
 
+
+I made sure scenarios were atomic and did not have any dependancies on the previous scenario's execution.
+
 ### BDD
 
 BDD Scenarios are meant to be a collaborative effort prior to the features being delivered, so I did my best to retrofit them to the example application state in this instance.
