@@ -6,6 +6,11 @@ const crewContainers = '.CrewMember-container';
 const allCrewMembers = '.CrewMember-container';
 const filterButton = '#filters > [type="button"]';
 
+/**
+ * Note: I did not add many comments to this file as I think the
+ * methods should be self explanitory
+ */
+
 Given('An Applicant exists with the name {string}', (name) => {
   cy.get(crewNames).contains(name);
 });
@@ -57,11 +62,12 @@ Then('{string} results are returned', (resultNumber) => {
   }
 });
 
-
+/**
+ * Returns all the crew cards as the @allApplicants alias
+ */
 When('I view the Applicants', () => {
   cy.get(allCrewMembers).as('allApplicants');
 });
-
 
 Then('I should see a picture of each applicant', () => {
   cy.get('@allApplicants')
@@ -73,7 +79,7 @@ Then('I should see a picture of each applicant', () => {
 
 Then('I should see the name of each applicant', () => {
   cy.get('@allApplicants')
-    .find('.CrewMemeber-name > div:nth-of-type(1)')
+    .find(crewNames)
     .each((name) => {
       cy.wrap(name)
         .should('be.visible')
@@ -83,7 +89,7 @@ Then('I should see the name of each applicant', () => {
 
 Then('I should see the city of each applicant', () => {
   cy.get('@allApplicants')
-    .find('.CrewMemeber-name > div:nth-of-type(2)')
+    .find(crewCities)
     .each((city) => {
       cy.wrap(city)
         .should('be.visible')

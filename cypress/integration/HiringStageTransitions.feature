@@ -7,7 +7,7 @@ Feature: Applicant Transitions
     Background: 
         Given The Application is loaded
 
-    @states
+    @transitions
     Scenario Outline: Move Applicant from Applied -> Interviewing
         Given The applicant <name> has a status of Applied
         When I move <name> from Applied to Interviewing
@@ -17,7 +17,7 @@ Feature: Applicant Transitions
             | name | 
             | 'danielle moore' | 
 
-    @states
+    @transitions
     Scenario Outline: Move Applicant from Hired -> Interviewing   
         Given The applicant <name> has a status of Hired
         When I move <name> from Hired to Interviewing
@@ -28,7 +28,7 @@ Feature: Applicant Transitions
             | 'julia cunningham' | 
 
     
-    @states
+    @transitions
     Scenario Outline: Move Applicant from Applied -> Interviewing -> Hired
         Given The applicant <name> has a status of Applied
         When I move <name> from Applied to Interviewing
@@ -40,7 +40,7 @@ Feature: Applicant Transitions
             | 'emma stewart' | 
 
   
-    @states
+    @transitions
     Scenario Outline: Move Applicant from Hired -> Interviewing -> Applied  
         Given The applicant <name> has a status of Hired
         When I move <name> from Hired to Interviewing
@@ -54,7 +54,7 @@ Feature: Applicant Transitions
             | 'julia cunningham' | 
 
     
-    @states
+    @transitions
     Scenario Outline: After Filtering Move Applicant from Hired -> Interviewing  
         When I filter by a city <city>
         And I move <name> from Hired to Interviewing

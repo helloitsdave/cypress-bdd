@@ -25,3 +25,6 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 import 'cypress-audit/commands';
+import { commandTimings } from 'cypress-timings';
+
+commandTimings();

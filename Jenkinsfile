@@ -24,16 +24,12 @@ pipeline {
               cron('H 8 * * 1,3,5')
             }
   stages {
-    stage('yarn installation') {
+    stage('Package Installation') {
         steps {
             sh 'yarn install'
           }
     }
-    stage('cypress install') {
-        steps {
-            sh 'yarn cypress install'	      }
-          }
-     stage('Run tests') {
+    stage('Run tests') {
         steps {
         sh "${params.test}"
       }
@@ -51,7 +47,7 @@ pipeline {
 
        success {
             // Send Success Notification. 
-            // Depending on the tools something like slackSend works well for slack integrations.
+            // Depending on the tools in use something like slackSend works well.
           }
 
        unstable {
@@ -59,9 +55,7 @@ pipeline {
           }
 
        failure {
-            script { 
               // Send Failure Notification
-            }          
       }
 
 }

@@ -33,7 +33,6 @@ Feature: Filtering
             | 'o'         | '3'         | 'Single Character - Three Matches' |
             | 'ff'        | '2'         | 'Two Characters - Two Matches'     |
 
-
     @filtering
     Scenario Outline: Filter Applicants By City and Name. <scenarioDetail>
         When I filter by a city <city>
@@ -58,13 +57,15 @@ Feature: Filtering
         Then '0' results are returned
 
         Examples:
-            | name               | scenarioDetail                                       |
-            | 'Julia'            | 'Upper Case Firstname - No Match'                    |
-            | 'julia cunningham' | 'Full Name - No Match - Seems like a bug/limitation' |
-            | 'julia?'           | 'Firstname with special character at end - No Match  |
-            | '1'                | 'Number - No Match                                   |
-            | 'brian'            | 'Non existing name - No Match                        |
-            | 'liverpool'        | 'City rather than name - No Match                    |
+            | name                             | scenarioDetail                                       |
+            | 'Julia'                          | 'Upper Case Firstname - No Match'                    |
+            | 'julia cunningham'               | 'Full Name - No Match - Seems like a bug/limitation' |
+            | 'julia?'                         | 'Firstname with special character at end - No Match  |
+            | '1'                              | 'Number - No Match                                   |
+            | 'brian'                          | 'Non existing name - No Match                        |
+            | 'liverpool'                      | 'City rather than name - No Match                    |
+            | ' '                              | 'Empty String Search - No Matches'                   |
+            | '"<script>alert("xss")</script>' | 'XSS String - No Match'                              |
 
 
     @filter @negative
@@ -73,9 +74,10 @@ Feature: Filtering
         Then '0' results are returned
 
         Examples:
-            | city               | scenarioDetail                    |
-            | 'LIVERPOOL'        | 'Upper Case - No Match'           |
-            | 'sheff field'      | 'Space in City - No Match         |
-            | 'julia'            | 'Name rather than City - No Match |
-            | '姓名'             | 'Double Byte - No Match           |
-            | "julia' or '1'='1" | 'SQL Injection - No Match'        |
+            | city               | scenarioDetail                     |
+            | 'LIVERPOOL'        | 'Upper Case - No Match'            |
+            | 'sheff field'      | 'Space in City - No Match          |
+            | 'julia'            | 'Name rather than City - No Match  |
+            | '姓名'             | 'Double Byte - No Match            |
+            | ' '                | 'Empty String Search - No Matches' |
+            | "julia' or '1'='1" | 'SQL Injection - No Match'         |

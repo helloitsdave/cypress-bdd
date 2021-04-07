@@ -2,7 +2,7 @@
 
 This repo is an example Test Framework using https://www.cypress.io with Cucumber BDD
 
-## Pre-requisites
+## Prerequisites
 
 - [node](https://docs.npmjs.com/getting-started/installing-node) and [yarn](https://classic.yarnpkg.com/en/) are installed
 
@@ -43,15 +43,15 @@ I've written the steps in a declarative way and avoided using UI specific langua
 
 I imagine in a more complete version of the product that there may be front bff or backend APIs involved, so I would be using a mix of APIs to gather data and setup data as opposed to doing everything through the UI.
 
-### Key Folders
+### Test Related Folders
 
 Test related files can be found in the following folders.
 
-| Folder                       | Description                     |
-| ---------------------------- | ------------------------------- |
-| ./cypress/integration/common | Step Files                      |
-| ./cypress/integration        | Feature Files. Format: .feature |
-| ./cypress/fixtures           | Contains Mocked Test Data.      |
+| Folder                       | Description                                                                                   |
+| ---------------------------- | --------------------------------------------------------------------------------------------- |
+| ./cypress/integration        | Feature Files. These are the BDD tests written in Gherkin Format. Have the extension .feature |
+| ./cypress/integration/common | Step Files. Implements the Feature File statements using cypress commands                     |
+| ./cypress/fixtures           | Contains an Example of Mocked Redux Test Data.                                                |
 
 ## Test Overview
 
@@ -68,9 +68,11 @@ Below are some high level clarifications on the purpose of the different tests.
 
 I ensured the framework is fully shareable and suitable for CI with the following
 
+- Ability to run on docker
 - package.json - All Framework Dependancies have been included
-- Added scripts in package.json to easily facilitate
-- Included Example jenkinsFile
+- Added git.ignore to avoid checking in non required items like videos or node_modules
+- Added scripts in package.json to facilitate easy execution
+- Included example Jenkinsfile
 - JUnit Reporter enabled to integrate easily with Jenkins or other CI tool
 
 ## Docker
@@ -95,9 +97,24 @@ I would plan to utilize redux store manipulation further to test scenarios for e
 - Very long names or cities. How does the UI handle this?
 - Large amounts of crew members. How does the app loading times increase and UI respond?
 
+I would utilize a module like [faker](https://github.com/marak/Faker.js/) to help building the mocked objects.
+
 ## Performance
 
-I had a look at the cypress lighthouse audit plugin, however I ran into issues running against the local app. Please see more information in .cypress/integration/common/app-steps.
+In cypress.io best practices it mentions that cypress is not geared towards performance testing. 
+https://docs.cypress.io/guides/references/trade-offs#Automation-restrictions
+
+
+I had a look at the cypress lighthouse audit plugin, however I ran into issues running against the local app. Please see notes in .cypress/integration/common/app-steps. This would be a good tool for getting page loading measurements but not useful for measuring interactions like moving cards or filtering.
+
+
+Another plugin I looked at was https://github.com/bahmutov/cypress-timings. This logs the timing of cypress events when you select them in the cypress UI into the devtools console. Useful for debugging but not something that can be added into the tests.
+
+
+For a custom solution it may be possible to hook into the plugins logic and add a timer to track timings  before and after a task or action completes.
+
+
+Failing that, it may possible to instrument the app code to produce some timing metrics and capture this from the console during test runs. 
 
 ## Linting
 
@@ -116,6 +133,9 @@ To run linting and fix issues `yarn run lint-fix`
 
 This is the first time I have used Cucumber in conjunction with Cypress. I found the [plugin](https://www.npmjs.com/package/cypress-cucumber-preprocessor) setup relatively intuitive compared to other tools.
 
+
+I have tagged the scenarios in order to allow different combinations to be executed using -e TAGS='@tagName'.
+
 ### BDD
 
 BDD Scenarios are meant to be a collaborative effort prior to the features being delivered, so I did my best to retrofit them to the example application state in this instance.
@@ -130,6 +150,7 @@ When creating the tests based on the provided instructions, I assumed the curren
 - Accessibility issues
 
 ### Browsers
+
 Tests are passing against
 
 - Electron
