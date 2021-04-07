@@ -14,3 +14,8 @@ Then('I see the Applied, Interviewing and Hired Sections', () => {
   cy.contains('Hired')
     .should('be.visible');
 });
+
+Then('I see the Filters', () => {
+  cy.get('#filters')
+    .should('be.visible');
+});
