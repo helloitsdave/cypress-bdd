@@ -175,7 +175,7 @@ The most popular mobile browser viewport is width 360 x height 640. I added an a
 
 ### Unique attributes
 
-There were some complications when it came to targeting elements due to the lack of good locators. I would work to have development add unique data-marker attributes into the related components. One example is on the CrewMember cards where 'name' and 'city' are both just separate divs under
+There were some complications when it came to targeting elements due to the lack of good locators. I would work to have development add unique data-marker attributes into the related components. One example is on the CrewMember cards where 'name' and 'city' are both just separate divs under CrewMemeber-name.
 
 ### Yarn
 
